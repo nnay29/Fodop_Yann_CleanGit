@@ -1,0 +1,21 @@
+name: Build and Archive
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  archive-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create build info file
+        run: date > build_info.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: build_info.txt
